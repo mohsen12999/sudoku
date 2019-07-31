@@ -44,13 +44,50 @@ function showInTable(arr, htmlElementId){
     }
 }
 
-console.log(make2dArray(3));
-var a = make2dArray(2);
-a[0][0] = 1;
-a[0][1] = 2;
-a[1][0] = 3;
-a[1][1] = 4;
-console.log(a);
-showInTable(a,'table')
+// var a = make2dArray(2);
+// a[0][0] = 1;
+// a[0][1] = 2;
+// a[1][0] = 3;
+// a[1][1] = 4;
+// console.log(a);
+// showInTable(a,'table')
+
+function fillSudoku(n=3) {
+    var arr = make2dArray(n);
+
+    let numbers = new Array(n);
+    for (let i = 0; i < n; i++) {
+        numbers[i] = i; 
+    }
+
+    for (let row = 0; row < n; row++) {
+
+        let rowNumbers = [... numbers];
+
+        for (let col = 0; col < n; col++) {
+            let colNumbers = [... rowNumbers];
+
+            for (let i = 0; i < row; i++) {
+                const element = arr[i][col];
+                colNumbers = colNumbers.filter(function(value){return value!=element;});
+                console.log('filter',element,'colNumbers',colNumbers);
+            }
+
+            arr[row][col]= colNumbers.splice(randomNumber(colNumbers.length),1);
+            rowNumbers = rowNumbers.filter(function(value){return value!=arr[row][col];})
+        }
+        
+    }
+
+
+    console.log(arr);
+    showInTable(arr,'table')
+
+    return arr;
+}
+
+const randomNumber = n => Math.floor(Math.random() * n);
+
+fillSudoku(5)
 </script>
 </html>
