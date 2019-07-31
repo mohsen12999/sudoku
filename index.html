@@ -6,14 +6,51 @@
     <title>suducu</title>
 </head>
 <body>
-    <table>
-
-    </table>
+    <div id="table"></div>
 </body>
 <script>
 
+function make2dArray(n){
+    var arr = new Array(n);
+    for (let i = 0; i < arr.length; i++) {
+        arr[i]  = new Array(n);
+    }
+    return arr;
+}
 
+function showInTable(arr, htmlElementId){
+    var table = '<table>';
 
+    for (let i = 0; i < arr.length; i++) {
 
+        table += '<tr>';
+        const row = arr[i];
+
+        for (let j = 0; j < row.length; j++) {
+            const element = row[j];
+            
+            table += '<td>'+element+ '<td>';
+
+        }
+
+        table += '</tr>';
+    }
+
+    table += '</table>';
+
+    var ele = document.getElementById(htmlElementId);
+    if(ele){
+        ele.innerHTML = table;
+    }
+}
+
+console.log(make2dArray(3));
+var a = make2dArray(2);
+a[0][0] = 1;
+a[0][1] = 2;
+a[1][0] = 3;
+a[1][1] = 4;
+console.log(a);
+showInTable(a,'table')
 </script>
 </html>
