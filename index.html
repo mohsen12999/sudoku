@@ -52,7 +52,7 @@ function showInTable(arr, htmlElementId){
 // console.log(a);
 // showInTable(a,'table')
 
-function fillSudoku(n=3) {
+function makeNumberSudoku(n=3) {
     var arr = make2dArray(n);
 
     let numbers = new Array(n);
@@ -70,7 +70,6 @@ function fillSudoku(n=3) {
             for (let i = 0; i < row; i++) {
                 const element = arr[i][col];
                 colNumbers = colNumbers.filter(function(value){return value!=element;});
-                console.log('filter',element,'colNumbers',colNumbers);
             }
 
             arr[row][col]= colNumbers.splice(randomNumber(colNumbers.length),1);
@@ -79,15 +78,32 @@ function fillSudoku(n=3) {
         
     }
 
-
-    console.log(arr);
-    showInTable(arr,'table')
-
     return arr;
 }
 
 const randomNumber = n => Math.floor(Math.random() * n);
 
-fillSudoku(5)
+// fillSudoku(5)
+
+function makeWordSudoku(wordArray) {
+    const length = wordArray.length;
+    numArray = makeNumberSudoku(length);
+    console.log(length,numArray)
+
+    var arr = make2dArray(length);
+    for (let row = 0; row < length; row++) {
+        for (let col = 0; col < length; col++) {
+            arr[row][col] = wordArray[numArray[row][col]];
+        }
+    }
+
+    return arr;
+}
+
+var arr = ['cat','dog','sheep']
+var s = makeWordSudoku(arr);
+console.log(s);
+showInTable(s,'table')
+
 </script>
 </html>
