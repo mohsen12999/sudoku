@@ -7,6 +7,8 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import MainPage from "./main/main";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import GamePage from "./game/gamePage";
+import LoginPage from "./auth/loginPage";
 
 interface IStateProps {
     pageName?: AppPages;
@@ -20,6 +22,13 @@ class App extends React.Component<IStateProps & IDispatchProps, any> {
         switch (pageName) {
           case AppPages.MAIN_PAGE:
             return <MainPage />;
+
+          case AppPages.GAME_PAGE:
+            return <GamePage />;
+
+          case AppPages.AUTH_PAGE:
+            return <LoginPage />;
+
           default:
             return <MainPage />;
         }

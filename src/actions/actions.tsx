@@ -1,5 +1,6 @@
 import { ActionTypes } from "./actionTypes";
 import { Dispatch } from "redux";
+import { AppPages } from "../reducers/pages";
 
 // export const scorePage = () => dispatch => {
 //     //...
@@ -10,12 +11,11 @@ import { Dispatch } from "redux";
 // }
 
 export const changePage: Function =
-    (event: React.MouseEvent<HTMLButtonElement>, newPage: string, levelId: number) => (dispatch: Dispatch) => {
+    (event: React.MouseEvent<HTMLButtonElement>, newPage: AppPages, levelId: number) => (dispatch: Dispatch) => {
 
     event.stopPropagation();
-    // console.log('changePage actions', event, newPage, levelId);
     dispatch({
-        type: ActionTypes.CHANGE_PAGE, // newPage,
+        type: ActionTypes.CHANGE_PAGE,
         payload: { levelId, newPage },
     });
 };

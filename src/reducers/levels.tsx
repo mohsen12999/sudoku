@@ -1,5 +1,6 @@
 
 export interface ILevel {
+    levelId: number;
     levelName: String;
     levelWords: Array<String>;
     Worlds: Number;
@@ -9,6 +10,7 @@ export interface ILevel {
 
 export const Levels:ILevel[] = [
     {
+        levelId: 1,
         levelName: "مرحله تستی",
         levelWords: ["brave","clever","cruel","funny","selfish","lazy","person","kind","shy"],
         Worlds:9,

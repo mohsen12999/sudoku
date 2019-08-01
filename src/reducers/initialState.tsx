@@ -18,6 +18,7 @@ export class chapters {
 export interface IState {
   pageName: AppPages;
   levels: ILevel[];
+  levelId:Number;
   /*
   score: number,
   backgroundPic: string,
@@ -46,7 +47,8 @@ export interface IState {
 // initialState
 const init: IState = {
   pageName: AppPages.MAIN_PAGE,
-  levels: Levels
+  levels: Levels,
+  levelId: 1
 /*
   score: 0,
   backgroundPic: gameData.startPage.backgroundPic,// ''
