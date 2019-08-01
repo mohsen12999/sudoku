@@ -1,4 +1,4 @@
-import initialState from "./initialState";
+import initialState, { IState } from "./initialState";
 /*
 import {
   ActionTypes
@@ -7,7 +7,7 @@ import gameData from '../info/data';
 import { appPage } from '../info/data.interfaces';
 */
 
-export default function MainReducer(state = initialState, action: { type: any; payload: any }) {
+export default function MainReducer(state:IState = initialState, action: { type: any; payload: any }):any {
 
   switch (action.type) {
 /*
