@@ -9,7 +9,7 @@ export interface ILevel {
 
 export const Levels:ILevel[] = [
     {
-        levelName: "",
+        levelName: "مرحله تستی",
         levelWords: ["brave","clever","cruel","funny","selfish","lazy","person","kind","shy"],
         Worlds:9,
         hiddenWords:20,
