@@ -9,3 +9,5 @@
 - [ ] check true/false
 - [ ] port to framework like react
 - [ ] ui design
+
+https://marmelab.com/react-admin/Authentication.html

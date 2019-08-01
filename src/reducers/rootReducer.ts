@@ -1,8 +1,8 @@
 
-import { combineReducers } from 'redux';
-import MainReducer from './mainReducer';
+import { combineReducers } from "redux";
+import MainReducer from "./mainReducer";
 
 export default combineReducers({
-   //MainReducer
+   // mainReducer
    gameState: MainReducer
 });

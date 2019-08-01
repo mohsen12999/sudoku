@@ -1,12 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { AppPages } from "../reducers/pages";
+import { IState } from "../reducers/initialState";
+import { connect } from "react-redux";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import MainPage from "./main/main";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+interface IStateProps {
+    pageName?: AppPages;
+  }
+
+  interface IDispatchProps {
+}
+class App extends React.Component<IStateProps & IDispatchProps, any> {
+    renderPage = (pageName?: AppPages): React.ReactNode => {
+        // console.log('app.tsx pageName',pageName);
+        switch (pageName) {
+          case AppPages.MAIN_PAGE:
+            return <MainPage />;
+          default:
+            return <MainPage />;
+        }
+      }
+
+      render():JSX.Element {
+        return (
+          <TransitionGroup className="App">
+
+            <CSSTransition
+              key={this.props.pageName}
+              in={true}
+              appear={true}
+              timeout={1200}
+              classNames="fade"
+            >
+              {this.renderPage(this.props.pageName)}
+            </CSSTransition>
+
+          </TransitionGroup>
+        );
+      }
+}
+
+const mapStateToProps:any = (allState: { gameState: IState }) => ({
+    pageName: allState.gameState.pageName,
+  });
+
+  export default connect(mapStateToProps)(App);
+
+
+
+
+/*
 const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -21,9 +73,10 @@ const App: React.FC = () => {
       </header>
     </div>
   );
-}
+};
 
 export default App;
+*/
 
 /*
 <body>
@@ -49,7 +102,7 @@ function showInTable(arr, htmlElementId){
 
         for (let j = 0; j < row.length; j++) {
             const element = row[j];
-            
+
             table += '<td>'+element+ '<td>';
 
         }
@@ -78,7 +131,7 @@ function makeNumberSudoku(n=3) {
 
     let numbers = new Array(n);
     for (let i = 0; i < n; i++) {
-        numbers[i] = i; 
+        numbers[i] = i;
     }
 
     for (let row = 0; row < n; row++) {
@@ -96,7 +149,6 @@ function makeNumberSudoku(n=3) {
             arr[row][col]= colNumbers.splice(randomNumber(colNumbers.length),1);
             rowNumbers = rowNumbers.filter(function(value){return value!=arr[row][col];})
         }
-        
     }
 
     return arr;
