@@ -11,7 +11,7 @@ interface IStateProps {
 }
 
 const tempStyle: any = {
-    width: "30%"
+    // width: "30%"
 };
 
 class MainPage extends React.Component<IStateProps, any> {
@@ -21,23 +21,21 @@ class MainPage extends React.Component<IStateProps, any> {
             <div className="container">
                 <h5>صفحه اصلی</h5>
                 this is main page
-                    {
-                    Levels.map(level=>
+                <div className="row">
+                    {Levels.map(level=>
                         <div key={ level.levelId } className="col">
                             <div className="card" style={tempStyle}>
                                 <div className="card-body">
                                     <h5 className="card-title">{level.levelName} </h5>
-                                    <p className="card-text">{level.Worlds} * {level.Worlds}</p>
+                                    <p className="card-text">{level.worldsCount} * {level.worldsCount}</p>
                                     <button
-                                        onClick={event => this.props.changePage!(event, AppPages.GAME_PAGE,1)}
+                                        onClick={event => this.props.changePage!(event, AppPages.GAME_PAGE,level.levelId)}
                                         className="btn btn-primary">Play (not work yet)</button>
                                 </div>
                             </div>
                         </div>
-                    )
-                }
-
-
+                    )}
+                </div>
             </div>
         );
     }

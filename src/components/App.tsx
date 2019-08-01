@@ -11,53 +11,53 @@ import GamePage from "./game/gamePage";
 import LoginPage from "./auth/loginPage";
 
 interface IStateProps {
-    pageName?: AppPages;
-  }
+  pageName?: AppPages;
+}
 
-  interface IDispatchProps {
+interface IDispatchProps {
 }
 class App extends React.Component<IStateProps & IDispatchProps, any> {
-    renderPage = (pageName?: AppPages): React.ReactNode => {
-        // console.log('app.tsx pageName',pageName);
-        switch (pageName) {
-          case AppPages.MAIN_PAGE:
-            return <MainPage />;
+  renderPage = (pageName?: AppPages): React.ReactNode => {
+    // console.log('app.tsx pageName',pageName);
+    switch (pageName) {
+      case AppPages.MAIN_PAGE:
+        return <MainPage />;
 
-          case AppPages.GAME_PAGE:
-            return <GamePage />;
+      case AppPages.GAME_PAGE:
+        return <GamePage />;
 
-          case AppPages.AUTH_PAGE:
-            return <LoginPage />;
+      case AppPages.AUTH_PAGE:
+        return <LoginPage />;
 
-          default:
-            return <MainPage />;
-        }
-      }
+      default:
+        return <MainPage />;
+    }
+  }
 
-      render():JSX.Element {
-        return (
-          <TransitionGroup className="App">
+  render(): JSX.Element {
+    return (
+      <TransitionGroup className="App">
 
-            <CSSTransition
-              key={this.props.pageName}
-              in={true}
-              appear={true}
-              timeout={1200}
-              classNames="fade"
-            >
-              {this.renderPage(this.props.pageName)}
-            </CSSTransition>
+        <CSSTransition
+          key={this.props.pageName}
+          in={true}
+          appear={true}
+          timeout={1200}
+          classNames="fade"
+        >
+          {this.renderPage(this.props.pageName)}
+        </CSSTransition>
 
-          </TransitionGroup>
-        );
-      }
+      </TransitionGroup>
+    );
+  }
 }
 
-const mapStateToProps:any = (allState: { gameState: IState }) => ({
-    pageName: allState.gameState.pageName,
-  });
+const mapStateToProps: any = (allState: { gameState: IState }) => ({
+  pageName: allState.gameState.pageName,
+});
 
-  export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App);
 
 
 

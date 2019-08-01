@@ -18,7 +18,7 @@ export class chapters {
 export interface IState {
   pageName: AppPages;
   levels: ILevel[];
-  levelId:Number;
+  levelId: number;
   /*
   score: number,
   backgroundPic: string,
@@ -76,4 +76,5 @@ const init: IState = {
 
 export default init;
 
-
+// export const allLevels:Function = (state: IState) => state.levels;
+export const findThisLevel:Function = (state: IState) => state.levels.find(x=>x.levelId === state.levelId);

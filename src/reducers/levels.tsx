@@ -1,20 +1,28 @@
 
 export interface ILevel {
     levelId: number;
-    levelName: String;
-    levelWords: Array<String>;
-    Worlds: Number;
-    hiddenWords: Number;
-    locked: Boolean;
+    levelName: string;
+    levelWords: Array<string>;
+    worldsCount: number;
+    hiddenWordsCount: number;
+    locked: boolean;
 }
 
 export const Levels:ILevel[] = [
     {
         levelId: 1,
-        levelName: "مرحله تستی",
+        levelName: "مرحله تستی کوچک",
+        levelWords: ["brave","clever","cruel"],
+        worldsCount:3,
+        hiddenWordsCount:2,
+        locked:false
+    },
+    {
+        levelId: 2,
+        levelName: "مرحله تستی بزرگ",
         levelWords: ["brave","clever","cruel","funny","selfish","lazy","person","kind","shy"],
-        Worlds:9,
-        hiddenWords:20,
+        worldsCount:9,
+        hiddenWordsCount:20,
         locked:false
     }
 ];
