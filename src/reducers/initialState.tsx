@@ -1,4 +1,5 @@
 import { AppPages } from "./pages";
+import { ILevel,Levels } from "./levels";
 
 /*
 export class chapters {
@@ -16,6 +17,7 @@ export class chapters {
 
 export interface IState {
   pageName: AppPages;
+  levels: ILevel[];
   /*
   score: number,
   backgroundPic: string,
@@ -43,7 +45,8 @@ export interface IState {
 
 // initialState
 const init: IState = {
-  pageName: AppPages.MAIN_PAGE
+  pageName: AppPages.MAIN_PAGE,
+  levels: Levels
 /*
   score: 0,
   backgroundPic: gameData.startPage.backgroundPic,// ''
