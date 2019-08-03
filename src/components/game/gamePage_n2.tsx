@@ -24,7 +24,75 @@ class GamePageN2 extends React.Component<IStateProps, any> {
     randomNumber = (n: number) => Math.floor(Math.random() * n);
 
     makeSquar = (n:number) => {
+        let numbers: Array<number> = new Array(n);
+        for (let i: number = 0; i < n; i++) {
+            numbers[i] = i;
+        }
 
+        const sqrt: number = Math.sqrt(n);
+
+        var arr: Array<Array<number>> = new Array(sqrt);
+        for (let i: number = 0; i < sqrt; i++) {
+            arr[i] = new Array(sqrt);
+        }
+
+        for (let row: number = 0; row < sqrt; row++) {
+            for (let col: number = 0; col < sqrt; col++) {
+                const thisNum: number = numbers.splice(this.randomNumber(numbers.length), 1)[0];
+                arr[row][col] = thisNum;
+                numbers = numbers.filter(numb=>numb!==thisNum);
+            }
+        }
+    }
+
+    makeMainSudokuNumber = (n: number) => {
+        var arr: Array<Array<number>> = new Array(n);
+        for (let i: number = 0; i < arr.length; i++) {
+            arr[i] = new Array(n);
+        }
+
+        let numbers: Array<number> = new Array(n);
+        for (let i: number = 0; i < n; i++) {
+            numbers[i] = i;
+        }
+
+        const sqrt: number = Math.sqrt(n);
+
+        for (let mainRow: number = 0; mainRow < sqrt; mainRow++) {
+            // const element = array[row];
+            for (let MainCol: number = 0; MainCol < sqrt; MainCol++) {
+
+                let thisBoxNumbers = [...numbers];
+                // make little squere
+                for (let subRow: number = 0; subRow < sqrt; subRow++) {
+                    for (let subCol: number = 0; subCol < sqrt; subCol++) {
+
+                        let validNums = [...thisBoxNumbers]
+                        // Todo: check row
+                        if(mainRow>0){
+                            // validNums.filter
+                        }
+                        // Todo: check col
+                        if(mainRow>0){
+                            // validNums.filter
+                        }
+                        if(validNums.length===0) {
+                            // problem happen Do again from beggining
+                        }
+
+                        const thisNum: number = validNum.splice(this.randomNumber(validNum.length), 1)[0];
+                        const thisRow = mainRow*sqrt+subRow;
+                        const thisCol = mainCol*sqrt+subCol;
+
+                        arr[thisRow][thisCol] = thisNum;
+                        thisBoxNumbers = thisBoxNumbers.filter(numb=>numb!==thisNum);
+                    }
+                }
+
+
+
+            }
+        }
     }
 
 
