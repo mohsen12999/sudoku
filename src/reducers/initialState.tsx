@@ -46,9 +46,9 @@ export interface IState {
 
 // initialState
 const init: IState = {
-  pageName: AppPages.MAIN_PAGE,
+  pageName: AppPages.GAME_PAGE,// aAppPages.MAIN_PAGE,
   levels: Levels,
-  levelId: 1
+  levelId: 2
 /*
   score: 0,
   backgroundPic: gameData.startPage.backgroundPic,// ''

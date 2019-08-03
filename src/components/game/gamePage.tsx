@@ -33,35 +33,34 @@ class GamePage extends React.Component<IStateProps, any> {
 
         let finish:boolean = false;
 
-        while(!finish){
+        while(!finish) {
             finish = true;
 
             for (let row: number = 0; row < n; row++) {
 
                 let rowNumbers: Array<number> = [...numbers];
-                
+
                 for (let col: number = 0; col < n; col++) {
                     let colNumbers: Array<number> = [...rowNumbers];
-    
+
                     for (let i: number = 0; i < row; i++) {
                         const element: number = arr[i][col];
                         colNumbers = colNumbers.filter(value => value !== element);
                     }
-                    const thisNum = colNumbers.splice(this.randomNumber(colNumbers.length), 1)[0];
-                    if(thisNum == undefined){
+                    const thisNum:number = colNumbers.splice(this.randomNumber(colNumbers.length), 1)[0];
+                    if(thisNum === undefined) {
                         finish=false;
                         break;
                     }
                     arr[row][col] = thisNum;
                     rowNumbers = rowNumbers.filter(value => value !== thisNum);
                 }
-                if(!finish){
+                if(!finish) {
                     break;
                 }
             }
 
         }
-        
 
         return arr;
     }
@@ -69,7 +68,7 @@ class GamePage extends React.Component<IStateProps, any> {
     makeWordSudoku = (wordArray: Array<string>) => {
         const length: number = wordArray.length;
         const numArray: Array<Array<number>> = this.makeNumberSudoku(length);
-        console.log(numArray)
+        console.log(numArray);
 
         var arr: Array<Array<string>> = new Array(length);
         for (let i: number = 0; i < arr.length; i++) {
@@ -89,7 +88,7 @@ class GamePage extends React.Component<IStateProps, any> {
     render(): JSX.Element {
         const words: Array<string> = this.props.level?this.props.level.levelWords:[];
         const arr: Array<Array<string>> = this.makeWordSudoku(words);
-        console.log(arr)
+        console.log(arr);
         return (
             <div>
                 <h4>this is game page</h4>

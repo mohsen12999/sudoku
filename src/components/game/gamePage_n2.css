@@ -1,0 +1,24 @@
+
+table.game-table {
+    width: 100%;
+    border: 1px solid black;
+}
+
+td.all-td{
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+td.right-border{
+    border-right-color: black;
+}
+td.bottom-border{
+    border-bottom-color: black;
+}
+
+td.top-border{
+    border-top-color: black;
+}
+td.left-border{
+    border-left-color: black;
+}

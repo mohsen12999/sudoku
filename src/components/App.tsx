@@ -9,6 +9,7 @@ import MainPage from "./main/main";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GamePage from "./game/gamePage";
 import LoginPage from "./auth/loginPage";
+import GamePageN2 from "./game/gamePage_n2";
 
 interface IStateProps {
   pageName?: AppPages;
@@ -24,7 +25,7 @@ class App extends React.Component<IStateProps & IDispatchProps, any> {
         return <MainPage />;
 
       case AppPages.GAME_PAGE:
-        return <GamePage />;
+        return <GamePageN2 />;
 
       case AppPages.AUTH_PAGE:
         return <LoginPage />;
