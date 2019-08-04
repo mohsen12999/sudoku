@@ -133,23 +133,42 @@ class GamePageN2 extends React.Component<IStateProps, any> {
         return arr;
     }
 
-    makeHiddenNumbers = (n: number, arrayLenght: number) => {
+    makeDisplayWordsPlace = (n: number, arrayLenght: number) => {
         var arr: Array<Array<number>> = [];
-        for (let i: number = 0; i < n; i++) {
-            const row: number = this.randomNumber(arrayLenght);
-            const col: number = this.randomNumber(arrayLenght);
-            var num: Array<number> = [row, col];
-            if (this.isExistInHiddenNumber(arr, num)) {
-                i--;
-            } else {
-                arr.push([row, col]);
+        do {
+            for (let i: number = 0; i < n; i++) {
+                const row: number = this.randomNumber(arrayLenght);
+                const col: number = this.randomNumber(arrayLenght);
+                var num: Array<number> = [row, col];
+                if (this.isExistInDisplayWords(arr, num)) {
+                    i--;
+                } else {
+                    arr.push([row, col]);
+                }
             }
-            // const element = array[i];
-        }
+        } while (this.isDisplayWordsFullRow(arr, arrayLenght));// need 2 check not all in one row
+
         return arr;
     }
 
-    isExistInHiddenNumber = (arr: Array<Array<number>>, num: Array<number>) => {
+    isDisplayWordsFullRow = (arr: Array<Array<number>>, arrayLenght: number) => {
+
+        for (let row: number = 0; row < arrayLenght; row++) {
+            let fullRow: boolean = true;
+            for (let col: number = 0; col < arrayLenght; col++) {
+                if (!this.isExistInDisplayWords(arr, [row, col])) {
+                    fullRow = false;
+                    break;
+                }
+            }
+            if (fullRow) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    isExistInDisplayWords = (arr: Array<Array<number>>, num: Array<number>) => {
         for (let j: number = 0; j < arr.length; j++) {
             if (arr[j][0] === num[0] && arr[j][1] === num[1]) {
                 return true;
@@ -163,40 +182,42 @@ class GamePageN2 extends React.Component<IStateProps, any> {
         const arr: Array<Array<string>> = this.makeWordSudoku(words);
         const arrLenght: number = words.length;
         const sqrt: number = Math.sqrt(arrLenght);
-        const hiddenWordsCount: number = this.props.level ? this.props.level.hiddenWordsCount:0;
-        const hiddenNumbers: Array<Array<number>> = this.makeHiddenNumbers(hiddenWordsCount,arrLenght);
-        console.log(hiddenNumbers);
+        const displayWordsCount: number = this.props.level ? this.props.level.displayWordsCount : 0;
+        const displayWordsPlace: Array<Array<number>> = this.makeDisplayWordsPlace(displayWordsCount, arrLenght);
+        // console.log(displayWordsPlace);
         return (
             <div className="container">
                 <h4>this is game page</h4>
 
                 <table className="game-table">
-                    {arr.map((row, index) =>
-                        <tr id={"row_" + index} key={"row_" + index}>
-                            {row.map((ele, index2) => {
+                    <tbody>
+                    {arr.map((row, rowIndex) =>
+                        <tr id={"row_" + rowIndex} key={"row_" + rowIndex}>
+                            {row.map((ele, colIndex) => {
                                 let className: string = "all-td";
-                                if (index === 0) {
+                                if (rowIndex === 0) {
                                     className += " top-border";
-                                } else if (index % sqrt === sqrt - 1) {
+                                } else if (rowIndex % sqrt === sqrt - 1) {
                                     className += " bottom-border";
                                 }
-                                if (index2 === 0) {
+                                if (colIndex === 0) {
                                     className += " left-border";
-                                } else if (index2 % sqrt === sqrt - 1) {
+                                } else if (colIndex % sqrt === sqrt - 1) {
                                     className += " right-border";
                                 }
-                                if(this.isExistInHiddenNumber(hiddenNumbers,[index,index2])) {
-                                    className += " hidden";
+                                if (this.isExistInDisplayWords(displayWordsPlace, [rowIndex, colIndex])) {
+                                    className += " display";
                                 }
                                 return <td className={className}
-                                    id={"col_" + index + "_" + index2}
-                                    key={"col_" + index + "_" + index2}>
+                                    id={"col_" + rowIndex + "_" + colIndex}
+                                    key={"col_" + rowIndex + "_" + colIndex}>
                                     {ele}
                                 </td>;
                             }
                             )}
                         </tr>
                     )}
+                    </tbody>
                 </table>
 
             </div>

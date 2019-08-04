@@ -6,6 +6,7 @@ table.game-table {
 td.all-td {
     border: 1px solid lightgray;
     padding: 10px;
+    opacity: 0.3;
 }
 
 td.right-border {
@@ -24,6 +25,6 @@ td.left-border {
     border-left-color: black;
 }
 
-td.hidden {
-    opacity: 0.5;
+td.display {
+    opacity: 1;
 }
