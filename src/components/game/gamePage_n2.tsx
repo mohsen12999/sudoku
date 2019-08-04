@@ -48,8 +48,8 @@ class GamePageN2 extends React.Component<IStateProps, any> {
     makeMainSudokuNumber = (n: number) => {
         // return this._makeMainSudokuNumber(n);
         do {
-            var arr: number[][]|null = this._makeMainSudokuNumber(n);
-        }while(arr==null);
+            var arr: number[][] | null = this._makeMainSudokuNumber(n);
+        } while (arr == null);
 
         return arr;
     }
@@ -91,7 +91,7 @@ class GamePageN2 extends React.Component<IStateProps, any> {
                         }
                         if (validNums.length === 0) {
                             // problem happen Do again from beggining
-                            console.log("problem",mainRow,mainCol,thisRow,thisCol);
+                            // console.log("problem", mainRow, mainCol, thisRow, thisCol);
                             return null;
                         }
 
@@ -111,7 +111,7 @@ class GamePageN2 extends React.Component<IStateProps, any> {
         const length: number = wordArray.length;
         // const numArray: Array<Array<number>> = this.makeNumberSudoku(length);
         const numArray: Array<Array<number>> = this.makeMainSudokuNumber(length);
-        if(numArray.length===1) {
+        if (numArray.length === 1) {
             return [[]];
         }
 
@@ -133,12 +133,39 @@ class GamePageN2 extends React.Component<IStateProps, any> {
         return arr;
     }
 
+    makeHiddenNumbers = (n: number, arrayLenght: number) => {
+        var arr: Array<Array<number>> = [];
+        for (let i: number = 0; i < n; i++) {
+            const row: number = this.randomNumber(arrayLenght);
+            const col: number = this.randomNumber(arrayLenght);
+            var num: Array<number> = [row, col];
+            if (this.isExistInHiddenNumber(arr, num)) {
+                i--;
+            } else {
+                arr.push([row, col]);
+            }
+            // const element = array[i];
+        }
+        return arr;
+    }
+
+    isExistInHiddenNumber = (arr: Array<Array<number>>, num: Array<number>) => {
+        for (let j: number = 0; j < arr.length; j++) {
+            if (arr[j][0] === num[0] && arr[j][1] === num[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     render(): JSX.Element {
         const words: Array<string> = this.props.level ? this.props.level.levelWords : [];
         const arr: Array<Array<string>> = this.makeWordSudoku(words);
         const arrLenght: number = words.length;
         const sqrt: number = Math.sqrt(arrLenght);
-        // console.log(arr);
+        const hiddenWordsCount: number = this.props.level ? this.props.level.hiddenWordsCount:0;
+        const hiddenNumbers: Array<Array<number>> = this.makeHiddenNumbers(hiddenWordsCount,arrLenght);
+        console.log(hiddenNumbers);
         return (
             <div className="container">
                 <h4>this is game page</h4>
@@ -157,6 +184,9 @@ class GamePageN2 extends React.Component<IStateProps, any> {
                                     className += " left-border";
                                 } else if (index2 % sqrt === sqrt - 1) {
                                     className += " right-border";
+                                }
+                                if(this.isExistInHiddenNumber(hiddenNumbers,[index,index2])) {
+                                    className += " hidden";
                                 }
                                 return <td className={className}
                                     id={"col_" + index + "_" + index2}

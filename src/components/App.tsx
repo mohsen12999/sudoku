@@ -25,6 +25,9 @@ class App extends React.Component<IStateProps & IDispatchProps, any> {
         return <MainPage />;
 
       case AppPages.GAME_PAGE:
+        return <GamePage />;
+
+      case AppPages.GAME_PAGE_N2:
         return <GamePageN2 />;
 
       case AppPages.AUTH_PAGE:
